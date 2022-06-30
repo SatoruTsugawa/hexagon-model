@@ -1,0 +1,31 @@
+real E=1000000; //ヤング率
+real nu=0.35; //poisson比
+//成長パラメータ
+real p1=0.100;
+real p2=0.002;
+//ラーメ係数を計算する
+real lambda=E*nu/((1.+nu)*(1.-2*nu));
+real mu=E/(2.*(1.+nu));
+//歪テンソル
+macro tau(u) ((dx(u#2)+dy(u#1))/2)//EOM
+macro epsilon(u) [dx(u#1),tau(u),tau(u),dy(u#2)] //EOM
+macro div(u) (dx(u#1)+dy(u#2)) //EOM
+//歪テンソル1
+macro tau1(u) ((dx(u#4)+dy(u#3))/2)//EOM
+macro epsilon1(u) [dx(u#3),tau1(u),tau1(u),dy(u#4)] //EOM
+macro div1(u) (dx(u#3)+dy(u#4)) //EOM
+//応力テンソル
+macro S11(u) (lambda*div(u)+2*mu*dx(u#1)) //EOM
+macro S22(u) (lambda*div(u)+2*mu*dy(u#2)) //EOM
+macro S12(u) (2*mu*tau(u)) //EOM
+macro S21(u) (2*mu*tau(u)) //EOM
+macro sigma(u) [S11(u),S12(u),S21(u),S22(u)] //EOM
+//応力テンソル1
+macro SS11(u) (lambda*div1(u)+2*mu*dx(u#3)) //EOM
+macro SS22(u) (lambda*div1(u)+2*mu*dy(u#4)) //EOM
+macro SS12(u) (2*mu*tau1(u)) //EOM
+macro SS21(u) (2*mu*tau1(u)) //EOM
+macro sigma1(u) [SS11(u),SS12(u),SS21(u),SS22(u)] //EOM
+macro W(u) (0.5*(sigma(u)'*epsilon(u))) // EOM
+macro dW(u,v) (sigma(u)'*epsilon(v)) //EOM
+macro dW1(u,v) (sigma1(u)'*epsilon1(v)) //EOM
