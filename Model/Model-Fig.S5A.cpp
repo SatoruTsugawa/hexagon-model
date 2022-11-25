@@ -125,7 +125,7 @@ real ry = (0.15/0.03)*rx;
 
 
 //file name
-string ccc="case-5G-1";
+string ccc="case-S5A-1";
 //real ry = 0.15;
 //real rx = 0.15*0.030/ry;
 
@@ -142,13 +142,13 @@ mesh Th=buildmesh(a11(1)+a12(14)+a2(15)+a3(14)+a41(1)+a42(1)+a5(14)+a6(15)+a71(1
 
 mesh box=buildmesh(box1(1)+box3(1)+box2(-1)+box4(-1)); //the box for the plot
 
-//—LŒÀ—v‘f‹óŠÔ
+//æœ‰é™è¦ç´ ç©ºé–“
 fespace fbox(box,P2); 
 fespace Vh1(Th,P1);
 fespace Vh2(Th,[P2,P2]);
 
 Vh2 [u1,u2],[vf1,vf2],[V1,V2],[V01,V02],[V11,V12],[Vf1,Vf2],[u3,u4],[vf3,vf4];
-Vh2 [g1,g2]=[0,-100]; //•Ğ‚¿—À‚Ì’[‚É—^‚¦‚é—Í
+Vh2 [g1,g2]=[0,-100]; //ç‰‡æŒã¡æ¢ã®ç«¯ã«ä¸ãˆã‚‹åŠ›
 
 //plot(Th,wait=1,ps="test.eps");
 
